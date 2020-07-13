@@ -1,38 +1,47 @@
-// GIVEN a weather dashboard with form inputs
-// WHEN I search for a city
-// THEN I am presented with current and future conditions for that city and that city is added to the search history
-// WHEN I view current weather conditions for that city
-// THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
-// WHEN I view the UV index
-// THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-// WHEN I view future weather conditions for that city
-// THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
-// WHEN I click on a city in the search history
-// THEN I am again presented with current and future conditions for that city
-// WHEN I open the weather dashboard
-// THEN I am presented with the last searched city forecast
-
 //frontend
 
-//1. submit area id="userCity" btn id="submit"
-//1.1 localstorage btn 
+//1. search bar id="userCity" btn id="search"
+//1.1 local storage btn 
 
-//2. 1 forcast temp cityname humidity windspped uv (get lon and lat [colors]), pic id="oneDay"
+//2. 1 day forcast: 
+//2.1a city 
+//2.1a today's date (moment.js) 
+//2.2 temperature 
+//2.3 humidity 
+//2.4 windspeed 
+//2.5 uv (get lon and lat [colors]), 
+//2.6 icon id="oneDay"
 
-//3. 5 day forcast date, pic, temp humidity
+//3. 5 day forcast 
+//3.1 date
+//3.2 icon 
+//3.3 temp 
+//3.4 humidity
 
 //4. navbar 
 
 //backend
 
 //1. grab usercity
-//2. store/ push array and set to local storage (json.stringafy)
+
+//2. store/ push array and set to local storage (json.stringify)
+
 //3. get localstorage  (json.parse)
+
 //4. dynamically append btn to page (forloop based on array length)
+
 //5. call the 5day and 1 day passing the city
+
+// because I don't want to have to keep writing in the API key
+const appid = "acf26acb44236383cfc7ccf03de5f926";
+
+
 
 //fiveday forcast
 function fiveday(city){
+    var urlFiveDay = "https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid="+appid;
+    console.log(city);
+    console.log(urlFiveDay);
 
 }
 
@@ -40,22 +49,49 @@ function fiveday(city){
 function oneday(city){
     console.log(city)
     //api.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}
-    //var url="https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid={your api key}";
-    var url="http://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=439d4b804bc8187953eb36d2a8c26a02";
-console.log(url)
+    var urlOneDay = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+appid+"&units=imperial";
+
+console.log(urlOneDay)
     $.ajax({
-        url: url,
+        url: urlOneDay,
         method: "GET"
       }).then(function(response) {
+        //cityname 
+        // let userCity
+        
         // temp 
-        var temp=response.main.temp;
-        console.log(temp)
-    //cityname 
-    //humidity 
-    //windspped 
-    //pic
-    //uv (get lon and lat [colors]), and call sec ajax
-    //dynamically append #oneDay
+        const temp = response.main.temp;
+        console.log(temp) // in Fahrenheit
+        
+        //humidity 
+        const humidity = response.main.humidity;
+        console.log(humidity); // in %
+        
+        //windspped 
+        const windspeed = response.wind.speed
+        console.log(windspeed); // in MPH
+
+        //icon
+        
+        //uv (get lon and lat [colors])
+        // call second ajax for UV data
+        var lat=response.coord.lat;
+        var lon = response.coord.lon;
+        var urlUV= "http://api.openweathermap.org/data/2.5/uvi?appid="+appid+"&lat="+lat+"&lon="+lon;
+
+        $.ajax({
+            url: urlUV,
+            method: "GET"
+        }).then(function(uvData) {
+    
+            console.log(uvData);
+    
+            // Create and save a reference to new empty table row
+            var uv = uvData.value;
+            
+            console.log(uv)
+        });
+        //dynamically append #oneDay
       
   
         // Create and save a reference to new empty table row
