@@ -39,19 +39,38 @@ const appid = "acf26acb44236383cfc7ccf03de5f926";
 
 //fiveday forcast
 function fiveday(city){
-    var urlFiveDay = "https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid="+appid;
+    var urlFiveDay = "https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid="+appid+"&units=imperial";
     console.log(city);
     console.log(urlFiveDay);
 
+    $.ajax({
+        url: urlOneDay,
+        method: "GET"
+      }).then(function(response) {
+        //3.1 date
+        const date
+
+        //3.2 icon 
+        
+
+        //3.3 temp 
+        const temp
+
+        //3.4 humidity
+        const humidity
+      });
 }
 
 //1day forcast
 function oneday(city){
     console.log(city)
     //api.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}
+    // add url extension to convert kelvin into imperial (F) "&units=imperial"
     var urlOneDay = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+appid+"&units=imperial";
 
-console.log(urlOneDay)
+    // console.log(urlOneDay)
+    
+    // getting the data
     $.ajax({
         url: urlOneDay,
         method: "GET"
