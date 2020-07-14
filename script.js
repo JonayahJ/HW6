@@ -52,7 +52,7 @@ function oneday(city){
         //cityname 
         // let userCity
         
-        // temp 
+        // temperature
         const temp = response.main.temp;
         console.log(temp) // in Fahrenheit
         
@@ -60,7 +60,7 @@ function oneday(city){
         const humidity = response.main.humidity;
         console.log(humidity); // in %
         
-        //windspped 
+        //wind speed 
         const windspeed = response.wind.speed
         console.log(windspeed); // in MPH
 
@@ -68,32 +68,31 @@ function oneday(city){
         
         //uv (get lon and lat [colors])
         // call second ajax for UV data
-        var lat=response.coord.lat;
+            //use the oneday function response data to call up the UV index data
+        var lat = response.coord.lat; 
         var lon = response.coord.lon;
-        var urlUV= "http://api.openweathermap.org/data/2.5/uvi?appid="+appid+"&lat="+lat+"&lon="+lon;
+        
+        var urlUV = "http://api.openweathermap.org/data/2.5/uvi?appid="+appid+"&lat="+lat+"&lon="+lon;
 
         $.ajax({
             url: urlUV,
             method: "GET"
         }).then(function(uvData) {
-    
+
+            //does this work?
             console.log(uvData);
     
-            // Create and save a reference to new empty table row
+            // Create a variable to get the uv data
             var uv = uvData.value;
             
+            //show me the numbers
             console.log(uv)
         });
+        
         //dynamically append #oneDay
-      
-  
-        // Create and save a reference to new empty table row
-        //var tr = $("<tr>");
   
        
       });
-    
-
 }
 oneday("Boston");
 
@@ -104,7 +103,7 @@ function fiveday(city){
     console.log(urlFiveDay);
 
     $.ajax({
-        url: urlOneDay,
+        url: urlFiveDay,
         method: "GET"
       }).then(function(response) {
         //3.1 date
