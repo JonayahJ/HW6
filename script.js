@@ -1,44 +1,42 @@
 $(function(){
 
     //frontend
-
-    //1. search bar id="userCity" btn id="search"
-    //1.1 local storage btn 
-
-    //2. 1 day forcast: 
-    //2.1a city 
-    //2.1a today's date (moment.js) 
-    //2.2 temperature 
-    //2.3 humidity 
-    //2.4 windspeed 
-    //2.5 uv (get lon and lat [colors]), 
-    //2.6 icon id="oneDay"
-
-    //3. 5 day forcast 
-    //3.1 date
-    //3.2 icon 
-    //3.3 temp 
-    //3.4 humidity
-
-    //4. navbar 
+        //1. search bar id="userCity" btn id="search"
+            //1.1 local storage btn 
+        //2. 1 day forcast: 
+            //2.1a city 
+            //2.1a today's date (moment.js) 
+            //2.2 temperature 
+            //2.3 humidity 
+            //2.4 windspeed 
+            //2.5 uv (get lon and lat [colors]), 
+            //2.6 icon id="oneDay"
+        //3. 5 day forcast 
+            //3.1 date
+            //3.2 icon 
+            //3.3 temp 
+            //3.4 humidity
+        //4. CSS 
 
     //backend
+        //1. grab usercity
+        //2. store/ push array and set to local storage (json.stringify)
+        //3. get localstorage  (json.parse)
+        //4. dynamically append btn to page (forLoop based on array length)
+        //5. call the 5day and 1 day passing the city
 
-    //1. grab usercity
-
-    //2. store/ push array and set to local storage (json.stringify)
-
-    //3. get localstorage  (json.parse)
-
-    //4. dynamically append btn to page (forloop based on array length)
-
-    //5. call the 5day and 1 day passing the city
-
-    // because I don't want to have to keep writing in the API key
+    
+    // CODE ====================================================
+    
+    
+    
+    // global variables
     const appid = "acf26acb44236383cfc7ccf03de5f926";
+    const date = moment().format("(MM/DD/YYYY)")
+
 
     // grabbing user input data
-    $(".btn").on("click", function(event){
+    $("#search-btn").on("click", function(event){
         event.preventDefault();
         // make a new div
         var newDiv = $("<div>");
@@ -51,9 +49,9 @@ $(function(){
             //add it to local storage
             localStorage.setItem(input, "");
             //append the newDiv to the previous search area
-            $("#previous-search").text(newDiv)
+            $("#previous-search").append(newDiv)
             //add what is in the input into the newDiv
-            newDiv.text(input);
+            newDiv.append(input);
         };
     });
 
@@ -79,17 +77,18 @@ $(function(){
         method: "GET"
       }).then(function(response) {
         //city, date, icon
-            $("#user-city").text(city + " " + moment().format("(MM/DD/YYYY)"))
+            $("#user-city").text(city + " " + date);
             
             //icon
+            // http://openweathermap.org/img/wn/10d@2x.png
             // let currentIcon = "http://openweathermap.org/img/wn/" + icon + ".png"
             // let icon = response.weather[0].icon;
-            // console.log(icon);
+            // console.log(currentIcon);
 
         
         // temperature
         const temp = response.main.temp;
-        console.log(temp) // in Fahrenheit
+        // console.log(temp) // in Fahrenheit
         // creating an element to display temp
         $("#currentTemp").append(temp + " " + "&#8457;");
 
@@ -97,14 +96,14 @@ $(function(){
         
         //humidity 
         const humidity = response.main.humidity;
-        console.log(humidity); // in %
+        // console.log(humidity); // in %
         $("#currentHum").append(humidity + " " + "%");
 
 
         
         //wind speed 
         const windspeed = response.wind.speed
-        console.log(windspeed); // in MPH
+        // console.log(windspeed); // in MPH
         $("#currentWS").append(windspeed + " " + "mph");
 
         
@@ -123,13 +122,13 @@ $(function(){
         }).then(function(uvData) {
 
             //does this work?
-            console.log(uvData);
+            // console.log(uvData);
     
             // Create a variable to get the uv data
             var uv = uvData.value;
             
             //show me the numbers
-            console.log(uv)
+            // console.log(uv)
 
             $("#currentUV").append(uv)
         });  
@@ -147,17 +146,31 @@ $(function(){
         $.ajax({
             url: urlFiveDay,
             method: "GET"
-        }).then(function(response) {
-            //3.1 date
-            // const date
+        }).then(function(forecastData) {
+            // 3.1 date
+            // console.log(forecastData)
+            // set variable for the date and display it in moment.js format
+            var dOne = moment(forecastData.list[0].dt_text).format("MM/DD/YY");
+            // overwrite the Day 1 placeholder
+            $("#d-one").text(dOne)
+            var dTwo = moment(forecastData.list[0].dt_text).format("MM/DD/YY");
+            // console.log(dTwo)
+            $("#d-two").text(dTwo)
+            var dThree = moment(forecastData.list[0].dt_text).format("MM/DD/YY");
+            $("#d-three").text(dThree)
+            var dFour = moment(forecastData.list[0].dt_text).format("MM/DD/YY");
+            $("#d-four").text(dFour)
+            var dFive = moment(forecastData.list[0].dt_text).format("MM/DD/YY");
+            $("#d-five").text(dFive)
+                // how to find the different dates when they are all in the same array with the same name?
 
-            //3.2 icon 
+            // 3.2 icon 
             
 
-            //3.3 temp 
+            // 3.3 temp 
             // const temp
 
-            //3.4 humidity
+            // 3.4 humidity
             // const humidity
         });
     }
