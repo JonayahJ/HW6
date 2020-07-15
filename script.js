@@ -52,6 +52,7 @@ $(function(){
             $("#previous-search").append(newDiv)
             //add what is in the input into the newDiv
             newDiv.append(input);
+                // why isn't this working????
         };
     });
 
@@ -150,19 +151,25 @@ $(function(){
             // 3.1 date
             // console.log(forecastData)
             // set variable for the date and display it in moment.js format
-            var dOne = moment(forecastData.list[0].dt_text).format("MM/DD/YY");
-            // overwrite the Day 1 placeholder
-            $("#d-one").text(dOne)
-            var dTwo = moment(forecastData.list[0].dt_text).format("MM/DD/YY");
-            // console.log(dTwo)
-            $("#d-two").text(dTwo)
-            var dThree = moment(forecastData.list[0].dt_text).format("MM/DD/YY");
-            $("#d-three").text(dThree)
-            var dFour = moment(forecastData.list[0].dt_text).format("MM/DD/YY");
-            $("#d-four").text(dFour)
-            var dFive = moment(forecastData.list[0].dt_text).format("MM/DD/YY");
-            $("#d-five").text(dFive)
-                // how to find the different dates when they are all in the same array with the same name?
+            // var dOne = moment(forecastData.list[0].dt_text).format("MM/DD/YY");
+            // // overwrite the Day 1 placeholder
+            // $("#d-one").text(dOne)
+            // var dTwo = moment(forecastData.list[0].dt_text).format("MM/DD/YY");
+            // // console.log(dTwo)
+            // $("#d-two").text(dTwo)
+            // var dThree = moment(forecastData.list[0].dt_text).format("MM/DD/YY");
+            // $("#d-three").text(dThree)
+            // var dFour = moment(forecastData.list[0].dt_text).format("MM/DD/YY");
+            // $("#d-four").text(dFour)
+            // var dFive = moment(forecastData.list[0].dt_text).format("MM/DD/YY");
+            // $("#d-five").text(dFive)
+                // how to find the different dates when they are all in the same array with the same name???
+
+                for (var i = 0; i < forecastData.length; i += 8){
+                    // var dOne = moment(forecastData.list[i].dt_text).format("MM/DD/YY");
+                    // // overwrite the Day 1 placeholder
+                    // $("#d-one").text(dOne)
+                }
 
             // 3.2 icon 
             
