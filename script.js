@@ -42,7 +42,7 @@ function oneday(city){
     // add url extension to convert kelvin into imperial (F) "&units=imperial"
     var urlOneDay = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+appid+"&units=imperial";
 
-    // console.log(urlOneDay)
+    console.log(urlOneDay)
     
     // getting the data
     $.ajax({
@@ -71,7 +71,7 @@ function oneday(city){
             //use the oneday function response data to call up the UV index data
         var lat = response.coord.lat; 
         var lon = response.coord.lon;
-        
+
         var urlUV = "http://api.openweathermap.org/data/2.5/uvi?appid="+appid+"&lat="+lat+"&lon="+lon;
 
         $.ajax({
