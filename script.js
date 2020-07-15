@@ -33,28 +33,49 @@ $(function(){
     // global variables
     const appid = "acf26acb44236383cfc7ccf03de5f926";
     const date = moment().format("(MM/DD/YYYY)")
+    let cityArray = [];
 
 
-    // grabbing user input data
-    $("#search-btn").on("click", function(event){
-        event.preventDefault();
-        // make a new div
-        var newDiv = $("<div>");
-        // get the value of the input field
-        var input = $("#user-input").val();
-        // does it work????????
-        console.log(input);
-        // if there is input
-        if (input){
-            //add it to local storage
-            localStorage.setItem(input, "");
-            //append the newDiv to the previous search area
-            $("#previous-search").append(newDiv)
-            //add what is in the input into the newDiv
-            newDiv.append(input);
-                // why isn't this working????
-        };
+    // Function for displaying movie data
+    function renderButtons() {
+        console.log("render btn")
+
+    // Deletes the movies prior to adding new movies
+    // (this is necessary otherwise you will have repeat buttons)
+    $("#previous-search").empty();
+    // Loops through the array of movies
+    for (var i = 0; i < cityArray.length; i++) {
+
+    // Then dynamicaly generates buttons for each item in the array
+    // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+    var a = $("<button>");
+    // Adds a class of movie to our button
+    a.addClass("searchCity");
+    // Added a data-attribute
+    a.attr("data-name", cityArray[i]);
+    // Provided the initial button text
+    a.text(cityArray[i]);
+    // Added the button to the buttons-view div
+    $("#previous-search").append(a);
+    // console.log(a);
+  }
+//   console.log("end render fx")
+}
+
+    // This function handles events where the add item button is clicked
+    $("#search-btn").on("click", function(event) {
+    event.preventDefault();
+    // This line of code will grab the input from the textbox
+    var userCity = $("#user-input").val().trim();
+
+    // The item from the textbox is then added to our array
+    cityArray.push(userCity);
+    console.log(cityArray)
+
+    // Calling renderButtons which handles the processing of our movie array
+    renderButtons();
     });
+
 
     //1day forecast
     function oneday(city){
@@ -78,13 +99,13 @@ $(function(){
         method: "GET"
       }).then(function(response) {
         //city, date, icon
-            $("#user-city").text(city + " " + date);
             
             //icon
             // http://openweathermap.org/img/wn/10d@2x.png
-            // let currentIcon = "http://openweathermap.org/img/wn/" + icon + ".png"
-            // let icon = response.weather[0].icon;
-            // console.log(currentIcon);
+            var icon=$("<img>");
+            icon.attr("src","http://openweathermap.org/img/wn/"+response.weather[0].icon+"@2x.png");
+
+            $("#user-city").text(city + " " + date + icon);
 
         
         // temperature
@@ -148,6 +169,54 @@ $(function(){
             url: urlFiveDay,
             method: "GET"
         }).then(function(forecastData) {
+
+            //#fivedayarea
+/*
+            <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+            <h5 class="card-title" id="d-one">Day 1</h5>
+            <!-- icon -->
+            <p class="card-text" id="t-one">Temp: </p>
+            <p class="card-text" id="h-one">Humidity: </p>
+            </div>
+        </div>
+        */
+       for(var i=0;i<5;i++){
+
+       
+
+        var d1=$("<div>");
+        d1.attr("class","card text-white bg-primary mb-3")
+        var d2=$("<div>"); 
+        d2.attr("class", "card-body");
+        var h5=$("<h5>");
+        h5.attr("class", "card-title");
+        h5.attr("id", "d-one");
+        h5.text(moment(forecastData.list[i*8].dt_txt).format("MM/DD/YY"));
+
+        // http://openweathermap.org/img/wn/10d@2x.png
+        var icon=$("<img>");
+        icon.attr("src","http://openweathermap.org/img/wn/"+forecastData.list[i*8].weather[0].icon+"@2x.png");
+    
+        var p1=$("<p>");
+        p1.attr("class", "card-text");
+        p1.attr("id", "t-one");
+        p1.text(forecastData.list[i*8].main.temp + " " + "°F") 
+        var p2=$("<p>");
+        p2.attr("class", "card-text");
+        p2.attr("id", "h-one");
+        p2.text(forecastData.list[i*8].main.humidity + " " + "%");
+
+        d1.append(d2);
+        d1.append(h5);
+        d1.append(icon);
+        d1.append(p1);
+        d1.append(p2);
+
+
+     $("#fivedayarea").append(d1);
+       }
+
             // 3.1 date
             // console.log(forecastData)
             // set variable for the date and display it in moment.js format
@@ -165,11 +234,11 @@ $(function(){
             // $("#d-five").text(dFive)
                 // how to find the different dates when they are all in the same array with the same name???
 
-                for (var i = 0; i < forecastData.length; i += 8){
-                    // var dOne = moment(forecastData.list[i].dt_text).format("MM/DD/YY");
-                    // // overwrite the Day 1 placeholder
-                    // $("#d-one").text(dOne)
-                }
+                // for (var i = 0; i < forecastData.length; i += 8){
+                //     // var dOne = moment(forecastData.list[i].dt_text).format("MM/DD/YY");
+                //     // // overwrite the Day 1 placeholder
+                //     // $("#d-one").text(dOne)
+                // }
 
             // 3.2 icon 
             

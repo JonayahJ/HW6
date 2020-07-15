@@ -22,13 +22,21 @@
         <div class="row">
             <!-- Left hand side -->
             <div class="col-4 sidebar">
+                
+                <!-- Header -->
                 <h3>Search for a city:</h3>
+                
+                
+                <!-- Search Box Form -->
                 <form class="form-inline my-2 my-lg-0">
                     <input id="user-input" class="form-control mr-sm-2" type="search" placeholder="Atlanta" aria-label="Search">
+                    <!-- Button -->
                     <button id="search-btn" class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
-                  </form>
+                </form>
                 <br><br>
-                <div id=“previous-search”></div>
+
+                <!-- Previous Search -->
+                <div id="previous-search"></div>
             </div>
 
 
@@ -52,60 +60,17 @@
                 <!-- 5-day Forecast -->
                 <h2>5 Day Forecast:</h2>
                 <div class=“container”>
+                    
+                    
                     <!-- Cards -->
-                    <div class="row row-cols-1 row-cols-md-5">
+                    <div class="row row-cols-1 row-cols-md-5" id="fivedayarea">
                         <!-- Current City Date and Weather for 5 days -->
-                        <!-- Day 1 -->
-                        <div class="card text-white bg-primary mb-3">
-                            <div class="card-body">
-                            <h5 class="card-title" id="d-one">Day 1</h5>
-                            <!-- icon -->
-                            <p class="card-text" id="t-one">Temp: </p>
-                            <p class="card-text" id="h-one">Humidity: </p>
-                            </div>
-                        </div>
-                        <!-- Day 2 -->
-                        <div class="card text-white bg-primary mb-3">
-                            <div class="card-body">
-                            <h5 class="card-title" id="d-two">Day 2</h5>
-                            <!-- icon -->
-                            <p class="card-text" id="t-two">Temp: </p>
-                            <p class="card-text" id="h-two">Humidity: </p>
-                            </div>
-                        </div>
-                        <!-- Day 3 -->
-                        <div class="card text-white bg-primary mb-3">
-                            <div class="card-body">
-                            <h5 class="card-title" id="d-three">Day 3</h5>
-                            <!-- icon -->
-                            <p class="card-text" id="t-three">Temp: </p>
-                            <p class="card-text" id="h-three">Humidity: </p>
-                            </div>
-                        </div>
-                        <!-- Day 4 -->
-                        <div class="card text-white bg-primary mb-3">
-                            <div class="card-body">
-                            <h5 class="card-title" id="d-four">Day 4</h5>
-                            <!-- icon -->
-                            <p class="card-text" id="t-four">Temp: </p>
-                            <p class="card-text" id="h-four">Humidity: </p>
-                            </div>
-                        </div>
-                        <!-- Day 5 -->
-                        <div class="card text-white bg-primary mb-3">
-                            <div class="card-body">
-                            <h5 class="card-title" id="d-five">Day 5</h5>
-                            <!-- icon -->
-                            <p class="card-text" id="t-five">Temp: </p>
-                            <p class="card-text" id="h-five">Humidity: </p>
-                            </div>
-                        </div>
+                    
+        
+                  
                     </div>
                 </div>
             </div>
-        
-        
-        
         </div>
     </div>
 
