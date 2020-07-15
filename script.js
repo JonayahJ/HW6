@@ -102,10 +102,13 @@ $(function(){
             
             //icon
             // http://openweathermap.org/img/wn/10d@2x.png
-            var icon=$("<img>");
-            icon.attr("src","http://openweathermap.org/img/wn/"+response.weather[0].icon+"@2x.png");
+            var icon = $("<img>");
+            icon.attr("src","http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png");
 
-            $("#user-city").text(city + " " + date + icon);
+            console.log(icon)
+
+            $("#user-city").text(city + " " + date);
+
 
         
         // temperature
@@ -170,23 +173,14 @@ $(function(){
             method: "GET"
         }).then(function(forecastData) {
 
-            //#fivedayarea
-/*
-            <div class="card text-white bg-primary mb-3">
-            <div class="card-body">
-            <h5 class="card-title" id="d-one">Day 1</h5>
-            <!-- icon -->
-            <p class="card-text" id="t-one">Temp: </p>
-            <p class="card-text" id="h-one">Humidity: </p>
-            </div>
-        </div>
-        */
-       for(var i=0;i<5;i++){
+       for(var i = 0;i < 5; i++){
 
-       
 
-        var d1=$("<div>");
+        var d1 = $("<div>");
         d1.attr("class","card text-white bg-primary mb-3")
+            // d1 styling 
+            d1.attr("style", "padding: 10px")
+            d1.attr("style", "text-align: center")
         var d2=$("<div>"); 
         d2.attr("class", "card-body");
         var h5=$("<h5>");
@@ -197,15 +191,16 @@ $(function(){
         // http://openweathermap.org/img/wn/10d@2x.png
         var icon=$("<img>");
         icon.attr("src","http://openweathermap.org/img/wn/"+forecastData.list[i*8].weather[0].icon+"@2x.png");
+        console.log(icon)
     
         var p1=$("<p>");
         p1.attr("class", "card-text");
         p1.attr("id", "t-one");
-        p1.text(forecastData.list[i*8].main.temp + " " + "°F") 
+        p1.text("Temp: " + forecastData.list[i*8].main.temp + " " + "°F") 
         var p2=$("<p>");
         p2.attr("class", "card-text");
         p2.attr("id", "h-one");
-        p2.text(forecastData.list[i*8].main.humidity + " " + "%");
+        p2.text("Hum: " + forecastData.list[i*8].main.humidity + " " + "%");
 
         d1.append(d2);
         d1.append(h5);
