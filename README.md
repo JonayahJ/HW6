@@ -6,6 +6,9 @@
 * Then I added an area for the current weather data of the city.
 * And then for the same city, I added a separate 5-day forecast for the rest of the week.
 
+## Comments
+My code is quite confusing and I'm not sure how to make it less so.  I found it difficult to change the city name, add more spacing between the dynamically added cards for the 5-day weather, and get the local storage working and appending right.
+
 ## Link to dashboard
 https://jonayahj.github.io/HW6/
 
