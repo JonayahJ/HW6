@@ -37,6 +37,26 @@ $(function(){
     // because I don't want to have to keep writing in the API key
     const appid = "acf26acb44236383cfc7ccf03de5f926";
 
+    // grabbing user input data
+    $(".btn").on("click", function(event){
+        event.preventDefault();
+        // make a new div
+        var newDiv = $("<div>");
+        // get the value of the input field
+        var input = $("#user-input").val();
+        // does it work????????
+        console.log(input);
+        // if there is input
+        if (input){
+            //add it to local storage
+            localStorage.setItem(input, "");
+            //append the newDiv to the previous search area
+            $("#previous-search").text(newDiv)
+            //add what is in the input into the newDiv
+            newDiv.text(input);
+        };
+    });
+
     //1day forecast
     function oneday(city){
         //grab the city name
@@ -52,19 +72,19 @@ $(function(){
         //preview the JSON data
         console.log(urlOneDay)
     
-
     
     // getting the data
     $.ajax({
         url: urlOneDay,
         method: "GET"
       }).then(function(response) {
-        //cityname, date, icon
-            //city
-            //date
-            $("#user-city").append(" " + moment().format("dddd, MMMM Do, YYYY"))
+        //city, date, icon
+            $("#user-city").text(city + " " + moment().format("(MM/DD/YYYY)"))
+            
             //icon
-      
+            // let currentIcon = "http://openweathermap.org/img/wn/" + icon + ".png"
+            // let icon = response.weather[0].icon;
+            // console.log(icon);
 
         
         // temperature
@@ -110,10 +130,9 @@ $(function(){
             
             //show me the numbers
             console.log(uv)
-        });
-        
-        //dynamically append #oneDay
-  
+
+            $("#currentUV").append(uv)
+        });  
        
       });
     }
