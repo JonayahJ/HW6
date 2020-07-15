@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(function(){
 
     //frontend
 
@@ -39,12 +39,18 @@ $(document).ready(function(){
 
     //1day forecast
     function oneday(city){
-    console.log(city)
-    //api.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}
-    // add url extension to convert kelvin into imperial (F) "&units=imperial"
-    var urlOneDay = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+appid+"&units=imperial";
+        //grab the city name
+        var userCity = $("#search").val();
+        
+        //check for city name
+        console.log(city)
+    
+        //api.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}
+        // add url extension to convert kelvin into imperial (F) "&units=imperial"
+        var urlOneDay = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+appid+"&units=imperial";
 
-    console.log(urlOneDay)
+        //preview the JSON data
+        console.log(urlOneDay)
     
 
     
@@ -53,28 +59,36 @@ $(document).ready(function(){
         url: urlOneDay,
         method: "GET"
       }).then(function(response) {
-        //cityname 
-        // var userCity = $("<div>");
+        //cityname, date, icon
+            //city
+            //date
+            $("#user-city").append(" " + moment().format("dddd, MMMM Do, YYYY"))
+            //icon
+      
 
         
         // temperature
         const temp = response.main.temp;
         console.log(temp) // in Fahrenheit
         // creating an element to display temp
-        let domTemp = $("<p>").text(temp)
-        // displaying the temp
+        $("#currentTemp").append(temp + " " + "&#8457;");
+
         
         
         //humidity 
         const humidity = response.main.humidity;
         console.log(humidity); // in %
+        $("#currentHum").append(humidity + " " + "%");
+
+
         
         //wind speed 
         const windspeed = response.wind.speed
         console.log(windspeed); // in MPH
+        $("#currentWS").append(windspeed + " " + "mph");
 
-        //icon
         
+
         //uv (get lon and lat [colors])
         // call second ajax for UV data
             //use the oneday function response data to call up the UV index data
@@ -103,7 +117,7 @@ $(document).ready(function(){
        
       });
     }
-    oneday("Boston");
+    oneday("Brooklyn");
 
     //fiveday forecast
     function fiveday(city){
@@ -128,7 +142,7 @@ $(document).ready(function(){
             // const humidity
         });
     }
-    fiveday("Boston");
+    fiveday("Brooklyn");
 });
 
 

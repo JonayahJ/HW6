@@ -21,10 +21,12 @@
     <div class="container">
         <div class="row">
             <!-- Left hand side -->
-            <div class="col-3 sidebar">
+            <div class="col-4 sidebar">
                 <h3>Search for a city:</h3>
-                <input id=“user-input” type=“text” placeholder=“Atlanta...“>
-                <button>&#128269</button>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Atlanta" aria-label="Search">
+                    <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
+                  </form>
                 <br><br>
                 <div id=“previous-search”></div>
             </div>
@@ -32,12 +34,11 @@
 
 
             <!-- Main area -->
-            <div class="col-9 mainArea">
+            <div class="col-8 mainArea">
                 <!-- Current Weather Forecast -->
                 <div class="card">
                     <div class="card-body">
-                        <h2>City</h2>
-                        <p id="currentDate">Date: </p>
+                        <h2 id="user-city">City</h2>
                         <p id="currentTemp">Temp: </p>
                         <p id="currentHum">Humidity: </p>
                         <p id="currentWS">Wind Speed: </p>
