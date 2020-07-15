@@ -1,8 +1,16 @@
 header {
-    background-color: #555;
+    background-color: indigo;
     color: whitesmoke;
     text-align: center;
     height: 90px;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.sidebar {
+    background-color: lightgray;
+    height: 100%;
     width: 100%;
     padding: 20px;
     margin-bottom: 20px;

@@ -21,17 +21,96 @@
     <div class="container">
         <div class="row">
             <!-- Left hand side -->
-            <div class="col-md-4">
-                
+            <div class="col-3 sidebar">
+                <h3>Search for a city:</h3>
+                <input id=“user-input” type=“text” placeholder=“Atlanta...“>
+                <button>&#128269</button>
+                <br><br>
+                <div id=“previous-search”></div>
             </div>
-            <!-- Main area -->
-            <div class="col-md-8">
 
+
+
+            <!-- Main area -->
+            <div class="col-9 mainArea">
+                <!-- Current Weather Forecast -->
+                <div class="card">
+                    <div class="card-body">
+                        <h2>City</h2>
+                        <p id="currentDate">Date: </p>
+                        <p id="currentTemp">Temp: </p>
+                        <p id="currentHum">Humidity: </p>
+                        <p id="currentWS">Wind Speed: </p>
+                        <p id="currentUV">UV Index: </p>
+                    </div>
+                </div>
+                <br>
+
+
+
+                <!-- 5-day Forecast -->
+                <h2>5 Day Forecast:</h2>
+                <div class=“container”>
+                    <div class=“row”>
+                        <div class="col">
+                            <!-- Current City Date and Weather for 5 days -->
+                            <!-- Day 1 -->
+                            <div class="card text-white bg-primary mb-3" style="width: 20%;">
+                                <div class="card-body">
+                                <h5 class="card-title">Day 1</h5>
+                                <p class="card-text" id="d-one">Date: </p>
+                                <p class="card-text" id="t-one">Temp: </p>
+                                <p class="card-text" id="h-one">Humidity: </p>
+                                </div>
+                            </div>
+                            <!-- Day 2 -->
+                            <div class="card text-white bg-primary mb-3" style="width: 20%;">
+                                <div class="card-body">
+                                <h5 class="card-title">Day 2</h5>
+                                <p class="card-text" id="d-two">Date: </p>
+                                <p class="card-text" id="t-two">Temp: </p>
+                                <p class="card-text" id="h-two">Humidity: </p>
+                                </div>
+                            </div>
+                            <!-- Day 3 -->
+                            <div class="card text-white bg-primary mb-3" style="width: 20%;">
+                                <div class="card-body">
+                                <h5 class="card-title">Day 3</h5>
+                                <p class="card-text" id="d-three">Date: </p>
+                                <p class="card-text" id="t-three">Temp: </p>
+                                <p class="card-text" id="h-three">Humidity: </p>
+                                </div>
+                            </div>
+                            <!-- Day 4 -->
+                            <div class="card text-white bg-primary mb-3" style="width: 20%;">
+                                <div class="card-body">
+                                <h5 class="card-title">Day 4</h5>
+                                <p class="card-text" id="d-four">Date: </p>
+                                <p class="card-text" id="t-four">Temp: </p>
+                                <p class="card-text" id="h-four">Humidity: </p>
+                                </div>
+                            </div>
+                            <!-- Day 5 -->
+                            <div class="card text-white bg-primary mb-3" style="width: 20%;">
+                                <div class="card-body">
+                                <h5 class="card-title">Day 5</h5>
+                                <p class="card-text" id="d-five">Date: </p>
+                                <p class="card-text" id="t-five">Temp: </p>
+                                <p class="card-text" id="h-five">Humidity: </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        
+        
+        
         </div>
     </div>
 
     <!-- JS, Popper.js, and jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.25.1/moment.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
