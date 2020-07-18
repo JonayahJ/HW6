@@ -36,45 +36,64 @@ $(function(){
     let cityArray = [];
 
 
-    // Function for displaying movie data
+    // Function for displaying data data
     function renderButtons() {
         console.log("render btn")
 
-    // Deletes the movies prior to adding new movies
-    // (this is necessary otherwise you will have repeat buttons)
-    $("#previous-search").empty();
-    // Loops through the array of movies
-    for (var i = 0; i < cityArray.length; i++) {
+        // Deletes the data prior to adding new data 
+        // (this is necessary otherwise you will have repeat buttons)
+        $("#previous-search").empty();
+        // Loops through the array of data 
+        for (var i = 0; i < cityArray.length; i++) {
 
-    // Then dynamicaly generates buttons for each item in the array
-    // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
-    var a = $("<button>");
-    // Adds a class of movie to our button
-    a.addClass("searchCity");
-    // Added a data-attribute
-    a.attr("data-name", cityArray[i]);
-    // Provided the initial button text
-    a.text(cityArray[i]);
-    // Added the button to the buttons-view div
-    $("#previous-search").append(a);
-    // console.log(a);
-  }
-//   console.log("end render fx")
-}
+        // Then dynamicaly generates buttons for each item in the array
+        // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+        var a = $("<button>");
+        // Adds a class of data to our button
+        a.addClass("searchCity");
+        // Added a data-attribute
+        a.attr("data-name", cityArray[i]);
+        // Provided the initial button text
+        a.text(cityArray[i]);
+        // Added the button to the buttons-view div
+        $("#previous-search").append(a);
+        // console.log(a);
+        }
+        // console.log("end render fx")
+    }
 
     // This function handles events where the add item button is clicked
     $("#search-btn").on("click", function(event) {
     event.preventDefault();
-    // This line of code will grab the input from the textbox
-    var userCity = $("#user-input").val().trim();
 
-    // The item from the textbox is then added to our array
-    cityArray.push(userCity);
-    console.log(cityArray)
+        var newDiv = $("<div>");
+        var input = $("#user-input").val().trim();
+        console.log(input)
 
-    // Calling renderButtons which handles the processing of our movie array
-    renderButtons();
+        if (input){
+            localStorage.setItem(input, "");
+            $("#previous-search").append(newDiv);
+            newDiv.prepend(input);
+        }
+
+        oneday(input);
+        fiveday(input);
+        clear()
     });
+
+    function clear (){
+        // clear oneday
+        $("#user-city").text("Search city: ");
+        // $("#t-one").text("Temp: ");
+        $("#currentTemp").text("Temp: ");
+        $("#currentHum").text("Humidity: ");
+        $("#currentWS").text("Wind Speed: ");
+        $("#currentUV").text("UV Index: ")
+
+        // clear fiveday
+        $("#fivedayarea").text("");
+        
+    }
 
 
     //1day forecast
@@ -83,14 +102,14 @@ $(function(){
         var userCity = $("#search").val();
         
         //check for city name
-        console.log(city)
+        // console.log(city)
     
         //api.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}
         // add url extension to convert kelvin into imperial (F) "&units=imperial"
         var urlOneDay = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+appid+"&units=imperial";
 
         //preview the JSON data
-        console.log(urlOneDay)
+        // console.log(urlOneDay)
     
     
     // getting the data
@@ -104,26 +123,23 @@ $(function(){
             // http://openweathermap.org/img/wn/10d@2x.png
             var icon = $("<img>");
             icon.attr("src","http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png");
+            $("#icon").append(icon)
 
-            console.log(icon)
-
+            
+            // console.log(icon)
             $("#user-city").text(city + " " + date);
-
 
         
         // temperature
         const temp = response.main.temp;
         // console.log(temp) // in Fahrenheit
-        // creating an element to display temp
         $("#currentTemp").append(temp + " " + "&#8457;");
 
-        
         
         //humidity 
         const humidity = response.main.humidity;
         // console.log(humidity); // in %
         $("#currentHum").append(humidity + " " + "%");
-
 
         
         //wind speed 
@@ -131,7 +147,6 @@ $(function(){
         // console.log(windspeed); // in MPH
         $("#currentWS").append(windspeed + " " + "mph");
 
-        
 
         //uv (get lon and lat [colors])
         // call second ajax for UV data
@@ -145,28 +160,23 @@ $(function(){
             url: urlUV,
             method: "GET"
         }).then(function(uvData) {
-
-            //does this work?
-            // console.log(uvData);
     
             // Create a variable to get the uv data
             var uv = uvData.value;
-            
-            //show me the numbers
+        
             // console.log(uv)
-
             $("#currentUV").append(uv)
         });  
        
       });
     }
-    oneday("Brooklyn");
+
 
     //fiveday forecast
     function fiveday(city){
         var urlFiveDay = "https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid="+appid+"&units=imperial";
-        console.log(city);
-        console.log(urlFiveDay);
+        // console.log(city);
+        // console.log(urlFiveDay);
 
         $.ajax({
             url: urlFiveDay,
@@ -191,7 +201,7 @@ $(function(){
         // http://openweathermap.org/img/wn/10d@2x.png
         var icon=$("<img>");
         icon.attr("src","http://openweathermap.org/img/wn/"+forecastData.list[i*8].weather[0].icon+"@2x.png");
-        console.log(icon)
+        // console.log(icon)
     
         var p1=$("<p>");
         p1.attr("class", "card-text");
@@ -214,7 +224,7 @@ $(function(){
     });
     
     }
-    fiveday("Brooklyn");
+
 });
 
 
