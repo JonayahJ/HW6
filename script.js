@@ -84,7 +84,7 @@ $(function(){
     function clear (){
         // clear oneday
         $("#user-city").text("Search city: ");
-        // $("#t-one").text("Temp: ");
+        $("#icon").text("");
         $("#currentTemp").text("Temp: ");
         $("#currentHum").text("Humidity: ");
         $("#currentWS").text("Wind Speed: ");
